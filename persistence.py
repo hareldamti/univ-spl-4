@@ -4,11 +4,11 @@ from dbtools import Dao
  
 # Data Transfer Objects:
 class Employee(object):
-    def __init__(self, id, name, salary, branche):
+    def __init__(self, id, name, salary, branche_id):
         self.id = id
         self.name = name
         self.salary = salary
-        self.branche = branche
+        self.branche_id = branche_id
  
 class Supplier(object):
     def __init__(self, id, name, contact_information):
@@ -43,7 +43,7 @@ class Activitie(object):
 class Repository(object):
     def __init__(self):
         self._conn = sqlite3.connect('bgumart.db')
-        self._conn.text_factory = bytes
+        #self._conn.text_factory = bytes
         self.employees = Dao(Employee, self._conn)
         self.suppliers = Dao(Supplier, self._conn)
         self.products = Dao(Product, self._conn)
