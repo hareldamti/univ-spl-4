@@ -7,13 +7,13 @@ def add_branche(splittedline : list[str]):
     repo.branches.insert(Branche(*splittedline))
 
 def add_supplier(splittedline : list[str]):
-    repo.branches.insert(Supplier(*splittedline))
+    repo.suppliers.insert(Supplier(*splittedline))
 
 def add_product(splittedline : list[str]):
-    repo.branches.insert(Product(*splittedline))
+    repo.products.insert(Product(*splittedline))
 
 def add_employee(splittedline : list[str]):
-    repo.branches.insert(Employee(*splittedline))
+    repo.employees.insert(Employee(*splittedline))
 
 adders = {  "B": add_branche,
             "S": add_supplier,

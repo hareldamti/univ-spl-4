@@ -29,12 +29,12 @@ class Branche(object):
     def __init__(self, id, location, number_of_employees):
         self.id = id
         self.location = location
-        self.number_of_employees
+        self.number_of_employees = number_of_employees
 
 
 class Activitie(object):
     def __init__(self, product_id, quantity, activator_id, date):
-        self.product_id = id
+        self.product_id = product_id
         self.quantity = quantity
         self.activator_id = activator_id
         self.date = date
