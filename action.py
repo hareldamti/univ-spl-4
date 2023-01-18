@@ -19,8 +19,6 @@ def main(args : list[str]):
         for line in inputfile:
             splittedline : list[str] = line.strip().split(", ")
             #TODO: apply the action (and insert to the table) if possible
-            print(line)
             buyProduct(splittedline) if(int(splittedline[1]) > 0) else sellProduct(splittedline)
-            print("finished processing line" + line)
 if __name__ == '__main__':
     main(sys.argv)

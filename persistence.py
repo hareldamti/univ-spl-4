@@ -4,11 +4,11 @@ from dbtools import Dao
  
 # Data Transfer Objects:
 class Employee(object):
-    def __init__(self, id, name, salary, branche_id):
+    def __init__(self, id, name, salary, branche):
         self.id = id
         self.name = name
         self.salary = salary
-        self.branche_id = branche_id
+        self.branche = branche
  
 class Supplier(object):
     def __init__(self, id, name, contact_information):
