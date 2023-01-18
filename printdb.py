@@ -50,7 +50,7 @@ def main():
     """
     employerReportCursor.execute(stmt)
     for employerReport in employerReportCursor:
-        print(employerReport)
+        print(" ".join(map(str,employerReport)))
 
     print()
     print("Activities report")
