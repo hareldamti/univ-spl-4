@@ -1,59 +1,61 @@
 from persistence import *
 
 def main():
-    #TODO: implement
-    print("Activities")
+    output = ""
+    output += "Activities\n"
     activityCursor = repo._conn.cursor()
     stmt = "SELECT * FROM activities ORDER BY date"
     activityCursor.execute(stmt)
     for activity in activityCursor:
-        print(activity)
+        output += str(activity) + "\n"
     
-    print("Branches")
+    output += "Branches\n"
     brancheCursor = repo._conn.cursor()
     stmt = "SELECT * FROM branches ORDER BY id"
     brancheCursor.execute(stmt)
     for branche in brancheCursor:
-        print(branche)
+        output += str(branche) + "\n"
     
-    print("Employees")
+    output += "Employees\n"
     employeeCursor = repo._conn.cursor()
     stmt = "SELECT * FROM employees ORDER BY id"
     employeeCursor.execute(stmt)
     for employee in employeeCursor:
-        print(employee)
+        output += str(employee) + "\n"
 
-    print("Products")
+    output += "Products\n"
     productCursor = repo._conn.cursor()
     stmt = "SELECT * FROM products ORDER BY id"
     productCursor.execute(stmt)
     for product in productCursor:
-        print(product)
+        output += str(product) + "\n"
 
-    print("Suppliers")
+    output += "Suppliers\n"
     supplierCursor = repo._conn.cursor()
     stmt = "SELECT * FROM suppliers ORDER BY id"
     supplierCursor.execute(stmt)
     for supplier in supplierCursor:
-        print(supplier)
+        output += str(supplier) + "\n"
         
-    print()
-    print("Employers report")
+    output += "\n"
+    output += "Employers report\n"
     employerReportCursor = repo._conn.cursor()
-    stmt = """SELECT employees.name, employees.salary, branches.location, IFNULL(SUM(ABS(activities.quantity) * products.price),'0') AS total_income
+    stmt = """SELECT employees.name, employees.salary, branches.location, IFNULL( SUM(-activities.quantity * products.price), 0) AS total_income
     FROM employees
     LEFT JOIN branches ON employees.branche = branches.id
     LEFT JOIN activities ON employees.id = activities.activator_id
     LEFT JOIN products ON activities.product_id = products.id
-    GROUP BY employees.name, employees.salary, branches.location
+    GROUP BY employees.id
     ORDER BY employees.name ASC
     """
+
     employerReportCursor.execute(stmt)
     for employerReport in employerReportCursor:
-        print(" ".join(map(str,employerReport)))
+        output += " ".join(map(str,employerReport)) + "\n"
 
-    print()
-    print("Activities report")
+
+    output += "\n"
+    output += "Activities report\n"
     activityReportCursor = repo._conn.cursor()
     stmt = """SELECT activities.date, products.description, activities.quantity, employees.name as employee_name, suppliers.name as supplier_name
     FROM activities
@@ -64,9 +66,13 @@ def main():
     """
     activityReportCursor.execute(stmt)
     for activityReport in activityReportCursor:
-        print(activityReport)
+        output += str(activityReport) + "\n"
     
+    output = output[:-1]
+    print(output)
 
+    with open('res.txt','w') as f:
+        f.write(output)
     
 
 if __name__ == '__main__':
