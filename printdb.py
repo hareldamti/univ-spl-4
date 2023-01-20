@@ -51,7 +51,8 @@ def main():
 
     employerReportCursor.execute(stmt)
     for employerReport in employerReportCursor:
-        output += str(employerReport) + "\n"
+        output += " ".join(map(str,employerReport)) + "\n"
+
 
     output += "\n"
     output += "Activities report\n"
