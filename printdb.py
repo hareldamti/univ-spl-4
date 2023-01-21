@@ -38,7 +38,7 @@ def main():
         output += str(supplier) + "\n"
         
     output += "\n"
-    output += "Employers report\n"
+    output += "Employees report\n"
     employerReportCursor = repo._conn.cursor()
     stmt = """SELECT employees.name, employees.salary, branches.location, IFNULL( SUM(-activities.quantity * products.price), 0) AS total_income
     FROM employees
